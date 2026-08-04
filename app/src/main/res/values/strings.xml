@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AIPlanner</string>
+
+    <string name="slide_1_title">تو پای به راه در نه \nو هیچ مپرس</string>
+    <string name="slide_1_desc">برنامه‌ریزی روزانه‌ات رو به هوش مصنوعی بسپار</string>
+
+    <string name="slide_2_title">رهرو آن است که \nآهسته و پیوسته رود</string>
+    <string name="slide_2_desc">پیشرفت با قدم‌های کوچیک ساخته میشه</string>
+
+    <string name="slide_3_title">ز کوشش به \nهرچیز خواهی رسید</string>
+    <string name="slide_3_desc">با ساختن روتین های کوچیک،منظم شو</string>
+
+    <string name="slide_4_title">فرصت بودن را \nقدر بدان</string>
+    <string name="slide_4_desc">اولین برنامه‌ات رو بساز</string>
+
+</resources>
