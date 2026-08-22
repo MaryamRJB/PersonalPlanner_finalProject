@@ -43,6 +43,9 @@ public class Task {
 
     private String repeatType;
 
+    // Progress from 0 to 100
+    private int progress;
+
     public Task(String title,
                 String description,
                 int priority,
@@ -68,6 +71,9 @@ public class Task {
         this.reminderTime = reminderTime;
         this.repeated = repeated;
         this.repeatType = repeatType;
+
+        // New tasks start with 0% progress
+        this.progress = 0;
     }
 
     public int getId() {
@@ -172,5 +178,22 @@ public class Task {
 
     public void setRepeatType(String repeatType) {
         this.repeatType = repeatType;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        // Keep progress between 0 and 100
+        if (progress < 0) {
+            progress = 0;
+        }
+
+        if (progress > 100) {
+            progress = 100;
+        }
+
+        this.progress = progress;
     }
 }

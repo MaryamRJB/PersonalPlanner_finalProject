@@ -11,15 +11,15 @@ public class User {
 
     private String name;
     private String email;
-    private String password;
+    private String otp;
     private String wakeUpTime;
     private String sleepTime;
 
-    public User(String name, String email, String password,
+    public User(String name, String email, String otp,
                 String wakeUpTime, String sleepTime) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.otp = otp;
         this.wakeUpTime = wakeUpTime;
         this.sleepTime = sleepTime;
     }
@@ -48,12 +48,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getOtp() {
+        return otp;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setOtp(String otp) {
+        this.otp = otp;
     }
 
     public String getWakeUpTime() {

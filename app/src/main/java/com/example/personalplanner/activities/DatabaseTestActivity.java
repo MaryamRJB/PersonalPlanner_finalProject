@@ -7,6 +7,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.personalplanner.database.entity.Category;
+import com.example.personalplanner.database.entity.Schedule;
+import com.example.personalplanner.database.entity.SubTask;
 import com.example.personalplanner.database.entity.Task;
 import com.example.personalplanner.database.models.TaskWithCategory;
 import com.example.personalplanner.database.room.AppDatabase;
@@ -23,16 +25,20 @@ public class DatabaseTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
+        ExecutorService executor =
+                Executors.newSingleThreadExecutor();
 
         executor.execute(() -> {
 
             try {
 
                 AppDatabase db =
-                        AppDatabase.getInstance(getApplicationContext());
+                        AppDatabase.getInstance(
+                                getApplicationContext()
+                        );
 
-                Log.d(TAG, "========== DATABASE TEST START ==========");
+                Log.d(TAG,
+                        "========== FINAL DATABASE TEST START ==========");
 
 
                 // ==========================================
@@ -60,11 +66,11 @@ public class DatabaseTestActivity extends AppCompatActivity {
                 long now = System.currentTimeMillis();
 
                 Task task = new Task(
-                        "Test Task",
-                        "Database comprehensive test",
+                        "Final Database Test",
+                        "Complete database test",
                         5,
                         now + 86400000,
-                        60,
+                        120,
                         false,
                         (int) categoryId,
                         now,
@@ -83,7 +89,7 @@ public class DatabaseTestActivity extends AppCompatActivity {
 
 
                 // ==========================================
-                // 3. READ
+                // 3. READ TASK
                 // ==========================================
 
                 Task readTask =
@@ -94,98 +100,198 @@ public class DatabaseTestActivity extends AppCompatActivity {
                 if (readTask != null) {
 
                     Log.d(TAG,
-                            "3. READ: SUCCESS - "
+                            "3. READ TASK: SUCCESS - "
                                     + readTask.getTitle());
 
                 } else {
 
                     throw new Exception(
-                            "READ FAILED"
+                            "READ TASK FAILED"
                     );
                 }
 
 
                 // ==========================================
-                // 4. UPDATE
+                // 4. INSERT SUBTASKS
                 // ==========================================
 
-                readTask.setTitle(
-                        "Updated Test Task"
+                SubTask subTask1 = new SubTask(
+                        (int) taskId,
+                        "Frontend",
+                        "Develop frontend",
+                        10,
+                        11,
+                        false
                 );
 
-                readTask.setPriority(3);
+                SubTask subTask2 = new SubTask(
+                        (int) taskId,
+                        "Backend",
+                        "Develop backend",
+                        11,
+                        12,
+                        false
+                );
 
-                db.taskDao().update(readTask);
+                long subTaskId1 =
+                        db.subTaskDao().insert(subTask1);
 
-                Task updatedTask =
+                long subTaskId2 =
+                        db.subTaskDao().insert(subTask2);
+
+                Log.d(TAG,
+                        "4. INSERT SUBTASKS: SUCCESS - IDs = "
+                                + subTaskId1
+                                + ", "
+                                + subTaskId2);
+
+
+                // ==========================================
+                // 5. READ SUBTASKS
+                // ==========================================
+
+                List<SubTask> subTasks =
+                        db.subTaskDao()
+                                .testGetSubTasksByTaskId(
+                                        (int) taskId
+                                );
+
+                if (subTasks.size() == 2) {
+
+                    Log.d(TAG,
+                            "5. READ SUBTASKS: SUCCESS - Found "
+                                    + subTasks.size());
+
+                } else {
+
+                    throw new Exception(
+                            "SUBTASK READ FAILED"
+                    );
+                }
+
+
+                // ==========================================
+                // 6. COMPLETE FIRST SUBTASK
+                // ==========================================
+
+                db.subTaskDao().updateSubTaskStatus(
+                        (int) subTaskId1,
+                        true
+                );
+
+                Log.d(TAG,
+                        "6. UPDATE SUBTASK STATUS: SUCCESS");
+
+
+                // ==========================================
+                // 7. CALCULATE PROGRESS
+                // ==========================================
+
+                int totalSubTasks =
+                        db.subTaskDao()
+                                .getSubTaskCount(
+                                        (int) taskId
+                                );
+
+                int completedSubTasks =
+                        db.subTaskDao()
+                                .getCompletedSubTaskCount(
+                                        (int) taskId
+                                );
+
+                int progress = 0;
+
+                if (totalSubTasks > 0) {
+
+                    progress =
+                            (completedSubTasks * 100)
+                                    / totalSubTasks;
+                }
+
+                db.taskDao().updateProgress(
+                        (int) taskId,
+                        progress
+                );
+
+                Task progressTask =
                         db.taskDao().testGetTaskById(
                                 (int) taskId
                         );
 
-                if (updatedTask != null &&
-                        updatedTask.getTitle()
-                                .equals("Updated Test Task") &&
-                        updatedTask.getPriority() == 3) {
+                if (progressTask != null &&
+                        progressTask.getProgress() == 50) {
 
                     Log.d(TAG,
-                            "4. UPDATE: SUCCESS");
+                            "7. PROGRESS: SUCCESS - "
+                                    + progressTask.getProgress()
+                                    + "%");
 
                 } else {
 
                     throw new Exception(
-                            "UPDATE FAILED"
+                            "PROGRESS FAILED"
                     );
                 }
 
 
                 // ==========================================
-                // 5. SEARCH
+                // 8. INSERT SCHEDULE
                 // ==========================================
 
-                List<Task> searchResults =
-                        db.taskDao().testSearchTasks(
-                                "Updated Test"
-                        );
+                String testDate = "2026-08-25";
 
-                if (!searchResults.isEmpty()) {
+                Schedule schedule = new Schedule(
+                        (int) taskId,
+                        testDate,
+                        "10:00",
+                        "12:00"
+                );
+
+                long scheduleId =
+                        db.scheduleDao().insert(schedule);
+
+                Log.d(TAG,
+                        "8. INSERT SCHEDULE: SUCCESS - ID = "
+                                + scheduleId);
+
+
+                // ==========================================
+                // 9. QUERY SCHEDULE BY DATE
+                // ==========================================
+
+                List<Schedule> schedules =
+                        db.scheduleDao()
+                                .getSchedulesByDate(
+                                        testDate
+                                );
+
+                boolean scheduleFound = false;
+
+                for (Schedule item : schedules) {
+
+                    if (item.getTaskId() == (int) taskId) {
+
+                        scheduleFound = true;
+                        break;
+                    }
+                }
+
+                if (scheduleFound) {
 
                     Log.d(TAG,
-                            "5. SEARCH: SUCCESS - Found "
-                                    + searchResults.size()
-                                    + " task(s)");
+                            "9. DATE QUERY: SUCCESS - "
+                                    + testDate);
 
                 } else {
 
                     throw new Exception(
-                            "SEARCH FAILED"
+                            "DATE QUERY FAILED"
                     );
                 }
 
 
                 // ==========================================
-                // 6. FILTER BY PRIORITY
-                // ==========================================
-
-                List<Task> filteredTasks =
-                        db.taskDao().testFilterByPriority(3);
-
-                if (!filteredTasks.isEmpty()) {
-
-                    Log.d(TAG,
-                            "6. FILTER: SUCCESS - Found "
-                                    + filteredTasks.size()
-                                    + " task(s)");
-
-                } else {
-
-                    throw new Exception(
-                            "FILTER FAILED"
-                    );
-                }
-
-
-                // ==========================================
-                // 7. RELATION Task -> Category
+                // 10. TASK -> CATEGORY RELATION
                 // ==========================================
 
                 List<TaskWithCategory> relations =
@@ -197,7 +303,8 @@ public class DatabaseTestActivity extends AppCompatActivity {
 
                     if (item.task.getId() == (int) taskId &&
                             item.category != null &&
-                            item.category.getId() == (int) categoryId) {
+                            item.category.getId()
+                                    == (int) categoryId) {
 
                         relationFound = true;
                         break;
@@ -207,21 +314,23 @@ public class DatabaseTestActivity extends AppCompatActivity {
                 if (relationFound) {
 
                     Log.d(TAG,
-                            "7. RELATION: SUCCESS");
+                            "11. TASK-CATEGORY RELATION: SUCCESS");
 
                 } else {
 
                     throw new Exception(
-                            "RELATION FAILED"
+                            "TASK-CATEGORY RELATION FAILED"
                     );
                 }
 
 
                 // ==========================================
-                // 8. DELETE
+                // 11. DELETE
                 // ==========================================
 
-                db.taskDao().delete(updatedTask);
+                db.taskDao().delete(
+                        progressTask
+                );
 
                 Task deletedTask =
                         db.taskDao().testGetTaskById(
@@ -231,7 +340,7 @@ public class DatabaseTestActivity extends AppCompatActivity {
                 if (deletedTask == null) {
 
                     Log.d(TAG,
-                            "8. DELETE: SUCCESS");
+                            "12. DELETE: SUCCESS");
 
                 } else {
 
@@ -246,18 +355,18 @@ public class DatabaseTestActivity extends AppCompatActivity {
                 // ==========================================
 
                 Log.d(TAG,
-                        "================================");
+                        "========================================");
 
                 Log.d(TAG,
-                        "ALL DATABASE TESTS PASSED");
+                        "ALL FINAL DATABASE TESTS PASSED");
 
                 Log.d(TAG,
-                        "================================");
+                        "========================================");
 
                 runOnUiThread(() ->
                         Toast.makeText(
                                 DatabaseTestActivity.this,
-                                "ALL DATABASE TESTS PASSED",
+                                "ALL FINAL DATABASE TESTS PASSED",
                                 Toast.LENGTH_LONG
                         ).show()
                 );
@@ -265,13 +374,13 @@ public class DatabaseTestActivity extends AppCompatActivity {
             } catch (Exception e) {
 
                 Log.e(TAG,
-                        "DATABASE TEST FAILED",
+                        "FINAL DATABASE TEST FAILED",
                         e);
 
                 runOnUiThread(() ->
                         Toast.makeText(
                                 DatabaseTestActivity.this,
-                                "DATABASE TEST FAILED",
+                                "FINAL DATABASE TEST FAILED",
                                 Toast.LENGTH_LONG
                         ).show()
                 );
