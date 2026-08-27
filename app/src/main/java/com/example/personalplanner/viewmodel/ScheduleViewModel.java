@@ -9,6 +9,7 @@ import com.example.personalplanner.database.entity.Schedule;
 import com.example.personalplanner.database.repository.ScheduleRepository;
 
 import java.util.List;
+import androidx.lifecycle.LiveData;
 
 public class ScheduleViewModel extends AndroidViewModel {
 
@@ -49,5 +50,9 @@ public class ScheduleViewModel extends AndroidViewModel {
 
     public Schedule getScheduleById(int id){
         return repository.getScheduleById(id);
+    }
+
+    public LiveData<List<Schedule>> getSchedulesByDateLiveData(String date) {
+        return repository.getSchedulesByDateLiveData(date);
     }
 }

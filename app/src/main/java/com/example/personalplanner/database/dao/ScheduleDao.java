@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+import androidx.lifecycle.LiveData;
 
 import com.example.personalplanner.database.entity.Schedule;
 
@@ -33,6 +34,9 @@ public interface ScheduleDao {
 
     @Query("SELECT * FROM schedules WHERE date = :date")
     List<Schedule> getSchedulesByDate(String date);
+
+    @Query("SELECT * FROM schedules WHERE date = :date ORDER BY startTime ASC")
+    LiveData<List<Schedule>> getSchedulesByDateLiveData(String date);
 
     @Query("DELETE FROM schedules")
     void deleteAll();

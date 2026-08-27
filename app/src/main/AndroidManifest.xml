@@ -20,8 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        <activity-->
+<!--            android:name=".activities.DatabaseTestActivity"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".activities.OnnxTestActivity"-->
+<!--            android:exported="false" />-->
         <activity
-            android:name=".activities.DatabaseTestActivity"
+            android:name=".activities.SchedulerTestActivity"
             android:exported="false" />
     </application>
 

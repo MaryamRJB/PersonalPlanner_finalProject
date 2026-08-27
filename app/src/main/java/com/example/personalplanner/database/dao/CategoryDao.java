@@ -32,4 +32,7 @@ public interface CategoryDao {
 
     @Query("DELETE FROM categories")
     void deleteAll();
+
+    @Query("SELECT COUNT(*) FROM categories")
+    int countCategories();
 }

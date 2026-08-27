@@ -7,9 +7,14 @@ import com.example.personalplanner.database.repository.CategoryRepository;
 
 public class DatabaseInitializer {
 
-    public static void initialize(Context context){
+    public static void initialize(Context context) {
 
-        CategoryRepository repository = new CategoryRepository(context);
+        CategoryRepository repository =
+                new CategoryRepository(context);
+
+        if (repository.countCategories() > 0) {
+            return;
+        }
 
         repository.insert(new Category(
                 "Study",

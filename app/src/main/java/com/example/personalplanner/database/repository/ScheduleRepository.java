@@ -9,6 +9,7 @@ import com.example.personalplanner.database.room.AppDatabase;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import androidx.lifecycle.LiveData;
 
 public class ScheduleRepository {
 
@@ -52,5 +53,9 @@ public class ScheduleRepository {
 
     public Schedule getScheduleById(int id) {
         return scheduleDao.getScheduleById(id);
+    }
+
+    public LiveData<List<Schedule>> getSchedulesByDateLiveData(String date) {
+        return scheduleDao.getSchedulesByDateLiveData(date);
     }
 }

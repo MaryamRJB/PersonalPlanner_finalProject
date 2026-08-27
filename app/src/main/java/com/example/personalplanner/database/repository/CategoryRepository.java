@@ -47,4 +47,8 @@ public class CategoryRepository {
     public Category getCategoryById(int id) {
         return categoryDao.getCategoryById(id);
     }
+
+    public int countCategories() {
+        return categoryDao.countCategories();
+    }
 }

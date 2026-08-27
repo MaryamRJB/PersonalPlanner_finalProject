@@ -1,0 +1,16 @@
+[
+    "task_priority",
+    "task_duration",
+    "deadline_hours",
+    "slot_start_hour",
+    "slot_duration",
+    "preferred_start_hour",
+    "preferred_time_match",
+    "deadline_pressure",
+    "duration_efficiency",
+    "day_of_week",
+    "is_weekend",
+    "repeated_task",
+    "reminder_exists",
+    "category"
+]
