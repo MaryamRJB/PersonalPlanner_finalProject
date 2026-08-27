@@ -60,6 +60,10 @@ public class Scheduler {
 
         calendar.setTime(targetDate);
 
+        // Scheduleهای قبلی همین روز
+        List<Schedule> existingSchedules =
+                scheduleRepository.getSchedulesByDate(date);
+
         int dayOfWeek =
                 calendar.get(Calendar.DAY_OF_WEEK) - 1;
 
@@ -182,6 +186,20 @@ public class Scheduler {
                 continue;
             }
 
+            // اگر این Task قبلاً در Database برای این روز Schedule شده
+            boolean alreadyScheduled = false;
+
+            for (Schedule existing : existingSchedules) {
+                if (existing.getTaskId() == taskId) {
+                    alreadyScheduled = true;
+                    break;
+                }
+            }
+
+            if (alreadyScheduled) {
+                continue;
+            }
+
             int start =
                     candidate.getStartHour();
 
@@ -194,6 +212,15 @@ public class Scheduler {
                                     Math.ceil(
                                             duration / 60.0
                                     );
+
+            // بررسی تداخل با Scheduleهای قبلی Database
+            if (hasConflictWithExistingSchedules(
+                    start,
+                    duration,
+                    existingSchedules
+            )) {
+                continue;
+            }
 
             /*
              * بررسی Conflict
@@ -340,5 +367,51 @@ public class Scheduler {
         public float getScore() {
             return score;
         }
+
     }
+
+    private boolean hasConflictWithExistingSchedules(
+            int startHour,
+            int duration,
+            List<Schedule> schedules
+    ) {
+
+        double newStart = startHour;
+
+        double newEnd =
+                startHour +
+                        duration / 60.0;
+
+        for (Schedule schedule : schedules) {
+
+            double existingStart =
+                    parseTime(schedule.getStartTime());
+
+            double existingEnd =
+                    parseTime(schedule.getEndTime());
+
+            if (newStart < existingEnd &&
+                    newEnd > existingStart) {
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private double parseTime(String time) {
+
+        if (time == null || !time.contains(":")) {
+            return 0;
+        }
+
+        String[] parts = time.split(":");
+
+        int hours = Integer.parseInt(parts[0]);
+        int minutes = Integer.parseInt(parts[1]);
+
+        return hours + minutes / 60.0;
+    }
+
 }
