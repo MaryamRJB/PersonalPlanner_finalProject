@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="110dp"
         android:layout_marginEnd="10dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
@@ -24,7 +24,7 @@
             android:text="@string/slide_1_title"
             android:textColor="@android:color/white"
             android:textSize="@dimen/slide_title"
-            android:fontFamily="@font/Molsaq"
+            android:fontFamily="@font/molsaq"
             android:layout_gravity="end"/>
 
         <TextView
@@ -34,17 +34,8 @@
             android:text="@string/slide_1_desc"
             android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc"
-            android:fontFamily="@font/Kara"
+            android:fontFamily="@font/kara"
             android:layout_gravity="end"/>
-
-        <ImageButton
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/next_ic"
-            android:scaleType="centerInside"
-            android:layout_gravity="end"
-            android:padding="12dp" />
 
     </LinearLayout>
 </FrameLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- پس‌زمینه نوار (بخش خالی) -->
+    <item android:id="@android:id/background">
+        <shape>
+            <solid android:color="#CCCCCC" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+    <!-- نوار پیشرفت (بخش پر شده) -->
+    <item android:id="@android:id/progress">
+        <shape>
+            <solid android:color="#4CAF50" /> <!-- رنگ سبز -->
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+</layer-list>

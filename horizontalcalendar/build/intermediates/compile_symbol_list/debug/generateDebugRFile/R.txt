@@ -1,0 +1,6 @@
+int drawable rounded_background 0x0
+int font kara 0x0
+int font molsaq 0x0
+int id numberView 0x0
+int id textView 0x0
+int layout calendar_item 0x0

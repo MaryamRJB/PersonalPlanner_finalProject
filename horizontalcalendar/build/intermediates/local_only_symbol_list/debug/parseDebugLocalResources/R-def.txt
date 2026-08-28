@@ -1,0 +1,8 @@
+R_DEF: Internal format may change without notice
+local
+drawable rounded_background
+font kara
+font molsaq
+id numberView
+id textView
+layout calendar_item

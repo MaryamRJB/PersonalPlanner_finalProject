@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp">
+    <ImageButton
+        android:id="@+id/btnNewNote"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/add_ic"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent" />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textSize="17sp"
+        android:fontFamily="@font/kara"
+        android:text="لیست کارها"
+        android:textColor="#A9A9A9"/>
+
+</LinearLayout>
