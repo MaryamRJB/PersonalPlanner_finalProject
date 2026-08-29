@@ -6,7 +6,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.personalplanner.database.dao.CategoryDao;
+import com.example.personalplanner.database.dao.ScheduleDao;
+import com.example.personalplanner.database.dao.TaskDao;
+import com.example.personalplanner.database.entity.Category;
+import com.example.personalplanner.database.entity.Schedule;
 import com.example.personalplanner.database.entity.Task;
+import com.example.personalplanner.database.room.AppDatabase;
 import com.example.personalplanner.scheduler.Scheduler;
 
 import java.util.ArrayList;
@@ -28,11 +34,50 @@ public class SchedulerTestActivity extends AppCompatActivity {
 
             try {
 
-                scheduler = new Scheduler(
-                        getApplicationContext()
+                AppDatabase db =
+                        AppDatabase.getInstance(
+                                getApplicationContext()
+                        );
+
+                TaskDao taskDao = db.taskDao();
+                CategoryDao categoryDao = db.categoryDao();
+                ScheduleDao scheduleDao = db.scheduleDao();
+
+                // =====================================================
+                // 1. پاک کردن داده‌های تست قبلی
+                // =====================================================
+
+                scheduleDao.deleteAll();
+                taskDao.deleteAll();
+                categoryDao.deleteAll();
+
+                Log.d(TAG, "OLD TEST DATA CLEARED");
+
+                // =====================================================
+                // 2. ایجاد Category تستی
+                // =====================================================
+
+                Category category = new Category(
+                        "Test Category",
+                        "#2196F3",
+                        "ic_study"
                 );
 
-                long now = System.currentTimeMillis();
+                long categoryId =
+                        categoryDao.insert(category);
+
+                Log.d(
+                        TAG,
+                        "CATEGORY INSERTED: id="
+                                + categoryId
+                );
+
+                // =====================================================
+                // 3. ایجاد Taskهای تستی
+                // =====================================================
+
+                long now =
+                        System.currentTimeMillis();
 
                 Task task1 = new Task(
                         "Study Machine Learning",
@@ -41,15 +86,13 @@ public class SchedulerTestActivity extends AppCompatActivity {
                         now + 24 * 60 * 60 * 1000,
                         120,
                         false,
-                        1,
+                        (int) categoryId,
                         now,
                         now,
                         0,
                         false,
                         "NONE"
                 );
-
-                task1.setId(1);
 
                 Task task2 = new Task(
                         "Exercise",
@@ -58,15 +101,13 @@ public class SchedulerTestActivity extends AppCompatActivity {
                         now + 48 * 60 * 60 * 1000,
                         60,
                         false,
-                        1,
+                        (int) categoryId,
                         now,
                         now,
                         0,
                         false,
                         "NONE"
                 );
-
-                task2.setId(2);
 
                 Task task3 = new Task(
                         "Read Book",
@@ -75,7 +116,7 @@ public class SchedulerTestActivity extends AppCompatActivity {
                         now + 72 * 60 * 60 * 1000,
                         60,
                         false,
-                        1,
+                        (int) categoryId,
                         now,
                         now,
                         0,
@@ -83,21 +124,70 @@ public class SchedulerTestActivity extends AppCompatActivity {
                         "NONE"
                 );
 
-                task3.setId(3);
+                // =====================================================
+                // 4. ذخیره Taskها در Room
+                // =====================================================
 
-                List<Task> tasks = new ArrayList<>();
+                long id1 =
+                        taskDao.insert(task1);
+
+                long id2 =
+                        taskDao.insert(task2);
+
+                long id3 =
+                        taskDao.insert(task3);
+
+                task1.setId((int) id1);
+                task2.setId((int) id2);
+                task3.setId((int) id3);
+
+                Log.d(
+                        TAG,
+                        "TASK INSERTED: id1=" + id1
+                );
+
+                Log.d(
+                        TAG,
+                        "TASK INSERTED: id2=" + id2
+                );
+
+                Log.d(
+                        TAG,
+                        "TASK INSERTED: id3=" + id3
+                );
+
+                // =====================================================
+                // 5. ساخت لیست Taskها
+                // =====================================================
+
+                List<Task> tasks =
+                        new ArrayList<>();
 
                 tasks.add(task1);
                 tasks.add(task2);
                 tasks.add(task3);
 
-                String date = "2026-08-26";
+                // =====================================================
+                // 6. اجرای Scheduler
+                // =====================================================
 
-                List<?> schedules =
+                scheduler =
+                        new Scheduler(
+                                getApplicationContext()
+                        );
+
+                String date =
+                        "2026-08-28";
+
+                List<Schedule> schedules =
                         scheduler.generateSchedule(
                                 tasks,
                                 date
                         );
+
+                // =====================================================
+                // 7. نمایش نتیجه Scheduler
+                // =====================================================
 
                 Log.d(
                         TAG,
@@ -110,19 +200,68 @@ public class SchedulerTestActivity extends AppCompatActivity {
                                 + schedules.size()
                 );
 
-                scheduler.saveSchedule(
-                        (List) schedules
-                );
+                for (Schedule schedule :
+                        schedules) {
+
+                    Log.d(
+                            TAG,
+                            "SCHEDULE -> TaskId="
+                                    + schedule.getTaskId()
+                                    + " | Date="
+                                    + schedule.getDate()
+                                    + " | "
+                                    + schedule.getStartTime()
+                                    + " - "
+                                    + schedule.getEndTime()
+                    );
+                }
+
+                // =====================================================
+                // 8. ذخیره Scheduleها
+                // =====================================================
+
+                scheduler.saveSchedule(schedules);
 
                 Log.d(
                         TAG,
                         "SCHEDULE SAVED SUCCESSFULLY"
                 );
 
+                // =====================================================
+                // 9. بررسی اینکه Schedule واقعاً در DB ذخیره شده
+                // =====================================================
+
+                List<Schedule> savedSchedules =
+                        scheduleDao.getSchedulesByDate(date);
+
+                Log.d(
+                        TAG,
+                        "SAVED SCHEDULE COUNT = "
+                                + savedSchedules.size()
+                );
+
+                for (Schedule schedule :
+                        savedSchedules) {
+
+                    Log.d(
+                            TAG,
+                            "DB SCHEDULE -> TaskId="
+                                    + schedule.getTaskId()
+                                    + " | "
+                                    + schedule.getStartTime()
+                                    + " - "
+                                    + schedule.getEndTime()
+                    );
+                }
+
                 Log.d(
                         TAG,
                         "======================================"
                 );
+
+                // =====================================================
+                // 10. موفقیت تست
+                // =====================================================
 
                 runOnUiThread(() ->
                         Toast.makeText(

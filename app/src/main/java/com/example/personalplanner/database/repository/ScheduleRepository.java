@@ -27,6 +27,11 @@ public class ScheduleRepository {
         executor.execute(() -> scheduleDao.insert(schedule));
     }
 
+    // Insert synchronously - must be called from a background thread
+    public void insertAndWait(Schedule schedule) {
+        scheduleDao.insert(schedule);
+    }
+
     public void update(Schedule schedule) {
         executor.execute(() -> scheduleDao.update(schedule));
     }

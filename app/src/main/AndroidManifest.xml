@@ -23,9 +23,9 @@
 <!--        <activity-->
 <!--            android:name=".activities.DatabaseTestActivity"-->
 <!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".activities.OnnxTestActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".activities.OnnxTestActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.SchedulerTestActivity"
             android:exported="false" />
