@@ -4,55 +4,106 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import com.example.personalplanner.database.entity.Schedule;
 import com.example.personalplanner.database.repository.ScheduleRepository;
 
 import java.util.List;
-import androidx.lifecycle.LiveData;
 
 public class ScheduleViewModel extends AndroidViewModel {
 
     private final ScheduleRepository repository;
 
-    public ScheduleViewModel(@NonNull Application application) {
+    public ScheduleViewModel(
+            @NonNull Application application) {
+
         super(application);
-        repository = new ScheduleRepository(application);
+
+        repository =
+                new ScheduleRepository(application);
     }
 
-    public void insert(Schedule schedule){
+    // =========================
+    // INSERT
+    // =========================
+
+    public void insert(Schedule schedule) {
+
         repository.insert(schedule);
     }
 
-    public void update(Schedule schedule){
+    // =========================
+    // UPDATE / DELETE
+    // =========================
+
+    public void update(Schedule schedule) {
+
         repository.update(schedule);
     }
 
-    public void delete(Schedule schedule){
+    public void delete(Schedule schedule) {
+
         repository.delete(schedule);
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
+
         repository.deleteAll();
     }
 
-    public List<Schedule> getAllSchedules(){
+    public void deleteSchedulesByDate(String date) {
+
+        repository.deleteSchedulesByDate(date);
+    }
+
+    public void deleteSchedulesByTask(int taskId) {
+
+        repository.deleteSchedulesByTask(taskId);
+    }
+
+    // =========================
+    // GET
+    // =========================
+
+    public List<Schedule> getAllSchedules() {
+
         return repository.getAllSchedules();
     }
 
-    public List<Schedule> getSchedulesByDate(String date){
+    public List<Schedule> getSchedulesByDate(String date) {
+
         return repository.getSchedulesByDate(date);
     }
 
-    public List<Schedule> getSchedulesByTask(int taskId){
+    public LiveData<List<Schedule>>
+    getSchedulesByDateLiveData(String date) {
+
+        return repository
+                .getSchedulesByDateLiveData(date);
+    }
+
+    public List<Schedule> getSchedulesByTask(int taskId) {
+
         return repository.getSchedulesByTask(taskId);
     }
 
-    public Schedule getScheduleById(int id){
+    public Schedule getScheduleById(int id) {
+
         return repository.getScheduleById(id);
     }
 
-    public LiveData<List<Schedule>> getSchedulesByDateLiveData(String date) {
-        return repository.getSchedulesByDateLiveData(date);
+    // =========================
+    // STATISTICS
+    // =========================
+
+    public int countAllSchedules() {
+
+        return repository.countAllSchedules();
+    }
+
+    public int countSchedulesByDate(String date) {
+
+        return repository.countSchedulesByDate(date);
     }
 }

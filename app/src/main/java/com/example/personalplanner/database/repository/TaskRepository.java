@@ -85,9 +85,29 @@ public class TaskRepository {
     // TASK STATUS
     // =========================
 
-    public void updateTaskStatus(int taskId, boolean completed) {
-        executorService.execute(() ->
-                taskDao.updateTaskStatus(taskId, completed));
+    public void updateTaskStatus(
+            int taskId,
+            boolean completed) {
+
+        executorService.execute(() -> {
+
+            taskDao.updateTaskStatus(
+                    taskId,
+                    completed
+            );
+
+            if (completed) {
+
+                taskDao.updateProgress(
+                        taskId,
+                        100
+                );
+
+            } else {
+
+                updateProgressInternal(taskId);
+            }
+        });
     }
 
     // =========================

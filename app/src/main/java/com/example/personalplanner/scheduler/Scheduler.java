@@ -301,7 +301,8 @@ public class Scheduler {
             List<Schedule> schedules
     ) {
 
-        for (Schedule schedule : schedules) {
+        for (Schedule schedule :
+                schedules) {
 
             scheduleRepository.insertAndWait(
                     schedule
