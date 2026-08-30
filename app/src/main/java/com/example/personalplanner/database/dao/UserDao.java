@@ -5,13 +5,12 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+import androidx.room.Transaction;
 
 import com.example.personalplanner.database.entity.User;
+import com.example.personalplanner.database.models.UserWithPreference;
 
 import java.util.List;
-
-import androidx.room.Transaction;
-import com.example.personalplanner.database.models.UserWithPreference;
 
 @Dao
 public interface UserDao {
@@ -31,13 +30,13 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE id = :id")
     User getUserById(int id);
 
-    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
-    User getUserByEmail(String email);
+    @Query("SELECT * FROM users WHERE phone = :phone LIMIT 1")
+    User getUserByPhone(String phone);
 
     @Query("DELETE FROM users")
     void deleteAll();
 
     @Transaction
-    @Query("SELECT * FROM users WHERE id=:id")
+    @Query("SELECT * FROM users WHERE id = :id")
     UserWithPreference getUserWithPreference(int id);
 }

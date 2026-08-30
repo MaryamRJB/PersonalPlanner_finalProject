@@ -43,7 +43,7 @@ public class UserViewModel extends AndroidViewModel {
         return repository.getUserById(id);
     }
 
-    public User getUserByEmail(String email) {
-        return repository.getUserByEmail(email);
+    public User getUserByPhone(String phone) {
+        return repository.getUserByPhone(phone);
     }
 }

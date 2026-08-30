@@ -10,15 +10,15 @@ public class User {
     private int id;
 
     private String name;
-    private String email;
+    private String phone;
     private String otp;
     private String wakeUpTime;
     private String sleepTime;
 
-    public User(String name, String email, String otp,
+    public User(String name, String phone, String otp,
                 String wakeUpTime, String sleepTime) {
         this.name = name;
-        this.email = email;
+        this.phone = phone;
         this.otp = otp;
         this.wakeUpTime = wakeUpTime;
         this.sleepTime = sleepTime;
@@ -40,12 +40,12 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getOtp() {

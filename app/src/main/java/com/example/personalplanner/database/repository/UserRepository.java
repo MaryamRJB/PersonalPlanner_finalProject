@@ -46,7 +46,7 @@ public class UserRepository {
         return userDao.getUserById(id);
     }
 
-    public User getUserByEmail(String email) {
-        return userDao.getUserByEmail(email);
+    public User getUserByPhone(String phone) {
+        return userDao.getUserByPhone(phone);
     }
 }
