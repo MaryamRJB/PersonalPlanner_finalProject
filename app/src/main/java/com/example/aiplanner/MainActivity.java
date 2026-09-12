@@ -18,13 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        // پیدا کردن Bottom Navigation داخل include
         View bottomNavView = findViewById(R.id.bottom_nav);
 
         bottomNavigationView =
                 bottomNavView.findViewById(R.id.bottom_navigation);
 
-        // صفحه اولیه
         if (savedInstanceState == null) {
             showFragment(new HomeFragment());
         }
