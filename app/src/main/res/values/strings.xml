@@ -12,5 +12,7 @@
 
     <string name="slide_4_title">فرصت بودن را \nقدر بدان</string>
     <string name="slide_4_desc">اولین برنامه‌ات رو بساز</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

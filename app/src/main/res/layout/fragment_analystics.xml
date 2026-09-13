@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ai_gradient"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/profile_header"
+        layout="@layout/profile_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- خط راهنما برای 60% ارتفاع (پایان کارت‌ها) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/sixtyGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <!-- خط راهنما برای 90% ارتفاع (پایان بخش آمار ماهانه) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ninetyGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <!-- کارت‌های اصلی (از زیر هدر تا 60% صفحه) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/redContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/profile_header"
+        app:layout_constraintBottom_toTopOf="@id/sixtyGuideline">
+
+        <!-- کارت درصد موفقیت -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/percentCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/analystic_item_background_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.5">
+
+            <TextView
+                android:id="@+id/percentageWorkMonthTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="میزان موفقیت ماهانه"
+                android:fontFamily="@font/kara"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="38dp"
+                android:textSize="12sp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/percentageWorkMonth"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/item_analystic_background"
+                app:layout_constraintTop_toBottomOf="@id/percentageWorkMonthTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:text="۶۰"
+                android:fontFamily="@font/kara"/>
+
+            <TextView
+                android:id="@+id/percentageWorkDayTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="میزان موفقیت روزانه"
+                android:fontFamily="@font/kara"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="15dp"
+                android:textSize="12sp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toBottomOf="@id/percentageWorkMonth"/>
+            <TextView
+                android:id="@+id/percentageWorkDay"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/item_analystic_background"
+                app:layout_constraintTop_toBottomOf="@id/percentageWorkDayTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:text="۴۸"
+                android:fontFamily="@font/kara"/>
+
+            <TextView
+                android:id="@+id/percentageRoutineTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="قدرت عادت سازی شما"
+                android:fontFamily="@font/kara"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="15dp"
+                android:textSize="12sp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toBottomOf="@id/percentageWorkDay"/>
+            <TextView
+                android:id="@+id/percentageRoutine"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/item_analystic_background"
+                app:layout_constraintTop_toBottomOf="@id/percentageRoutineTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:text="۴۸"
+                android:fontFamily="@font/kara"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- کارت ساعت بیداری و خواب -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/hourCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/analystic_item_background_2"
+            app:layout_constraintEnd_toStartOf="@+id/percentCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_default="spread"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/timeCard">
+
+            <TextView
+                android:id="@+id/WakeUpTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ریتم بیداری"
+                android:fontFamily="@font/kara"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/WakeUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/item_analystic_background"
+                app:layout_constraintTop_toBottomOf="@id/WakeUpTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:text="۸:۳۰"
+                android:fontFamily="@font/kara"/>
+
+            <TextView
+                android:id="@+id/SleepTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ریتم خواب"
+                android:fontFamily="@font/kara"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toBottomOf="@id/WakeUp"/>
+            <TextView
+                android:id="@+id/Sleep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/item_analystic_background"
+                app:layout_constraintTop_toBottomOf="@id/SleepTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:text="۰۰:۰۰"
+                android:fontFamily="@font/kara"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- کارت زمان انرژی -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/timeCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/analystic_item_background_3"
+            app:layout_constraintEnd_toStartOf="@+id/percentCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_default="spread"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintTop_toBottomOf="@id/hourCard"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/PowerTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="اوج انرژی"
+                android:fontFamily="@font/kara"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="8dp"
+                android:textSize="12sp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/Power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/item_analystic_background"
+                app:layout_constraintTop_toBottomOf="@id/PowerTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:text="۷تا۱۸"
+                android:fontFamily="@font/kara"/>
+
+            <TextView
+                android:id="@+id/RestTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="زمان بازیابی"
+                android:fontFamily="@font/kara"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toBottomOf="@id/Power"
+                tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/Rest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/item_analystic_background"
+                app:layout_constraintTop_toBottomOf="@id/RestTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:text="۱۸تا۲۲"
+                android:fontFamily="@font/kara"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/monthlyStatsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:background="@drawable/analystic_item_background"
+        app:layout_constraintTop_toBottomOf="@id/sixtyGuideline"
+        app:layout_constraintBottom_toTopOf="@id/ninetyGuideline">
+
+        <TextView
+            android:id="@+id/monthlyStatsTitle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="نمودار ماهانه"
+            android:fontFamily="@font/kara"
+            android:background="@drawable/item_analystic_background"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/monthlyStatsTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

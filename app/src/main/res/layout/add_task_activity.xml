@@ -140,7 +140,6 @@
             android:fontFamily="@font/kara"
             android:gravity="center"
             app:boxBackgroundColor="#F5F5F5"
-            app:boxCornerRadius="12dp"
             android:textColorHint="#888888"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -170,7 +169,6 @@
             android:hint="دسته بندی"
             android:fontFamily="@font/kara"
             app:boxBackgroundColor="#F5F5F5"
-            app:boxCornerRadius="12dp"
             android:textColorHint="#888888"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -182,11 +180,12 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/add_task_field"
                 android:fontFamily="@font/kara"
-                android:gravity="center"
                 android:inputType="none"
+                android:gravity="center"
                 android:maxLines="1"
                 android:padding="12dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:clickable="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -198,7 +197,6 @@
             android:hint="مدت زمان"
             android:fontFamily="@font/kara"
             app:boxBackgroundColor="#F5F5F5"
-            app:boxCornerRadius="12dp"
             android:textColorHint="#888888"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -214,7 +212,8 @@
                 android:inputType="none"
                 android:maxLines="1"
                 android:padding="12dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:clickable="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -225,6 +224,7 @@
             android:layout_marginBottom="50dp"
             android:background="@drawable/add_task_button"
             android:fontFamily="@font/kara"
+            android:includeFontPadding="false"
             android:textSize="17sp"
             android:textStyle="bold"
             android:text="ثبت کار"

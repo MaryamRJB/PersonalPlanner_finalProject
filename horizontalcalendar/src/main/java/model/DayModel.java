@@ -1,15 +1,27 @@
-package model; // نام پکیج خود را جایگزین کنید
+package model;
 
 public class DayModel {
+
     private int dayOfMonth;
+    private int month;
     private String monthName;
     private String dayOfWeekName;
     private int year;
-    private boolean isToday;
 
+    private boolean isToday;
     private boolean isSelected;
-    public DayModel(int dayOfMonth, String monthName, String dayOfWeekName, int year, boolean isToday,boolean isSelected) {
+
+    public DayModel(
+            int dayOfMonth,
+            int month,
+            String monthName,
+            String dayOfWeekName,
+            int year,
+            boolean isToday,
+            boolean isSelected) {
+
         this.dayOfMonth = dayOfMonth;
+        this.month = month;
         this.monthName = monthName;
         this.dayOfWeekName = dayOfWeekName;
         this.year = year;
@@ -19,6 +31,10 @@ public class DayModel {
 
     public int getDayOfMonth() {
         return dayOfMonth;
+    }
+
+    public int getMonth() {
+        return month;
     }
 
     public String getMonthName() {
@@ -37,11 +53,15 @@ public class DayModel {
         return isToday;
     }
 
-    public boolean isSelected() { return isSelected; }
+    public boolean isSelected() {
+        return isSelected;
+    }
 
-    public void setSelected(boolean selected) { isSelected = selected; }
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
     public void setToday(boolean today) {
         isToday = today;
     }
-
 }

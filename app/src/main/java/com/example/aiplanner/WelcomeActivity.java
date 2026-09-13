@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+
 public class WelcomeActivity extends AppCompatActivity {
 
     private ViewPager viewPager;

@@ -26,7 +26,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-    compileSdkExtension 12
     buildToolsVersion '34.0.0'
 }
 
@@ -38,6 +37,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation project(':horizontalcalendar')
+    implementation project(':database')
+    implementation "androidx.room:room-runtime:2.6.1"
+    annotationProcessor "androidx.room:room-compiler:2.6.1"
+    implementation 'com.apachat:primecalendar-android:1.3.93'
+    implementation 'com.google.code.gson:gson:2.11.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

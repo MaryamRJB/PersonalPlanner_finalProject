@@ -1,79 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="92dp"
+
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+
     android:background="@drawable/rounded_background_task"
-    android:layout_margin="10dp"
-    android:padding="15dp">
+    android:paddingStart="14dp"
+    android:paddingEnd="14dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+
+    <!-- ========================= -->
+    <!-- نوار رنگی Category -->
+    <!-- ========================= -->
+
+    <View
+        android:id="@+id/categoryColor"
+        android:layout_width="5dp"
+        android:layout_height="0dp"
+
+        android:background="@drawable/category_color_background"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <!-- ========================= -->
+    <!-- عنوان Task -->
+    <!-- ========================= -->
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/kara"
+        android:textSize="18sp"
+        android:textStyle="bold"
+
+        android:gravity="right"
+        android:maxLines="1"
+        android:ellipsize="end"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/categoryColor" />
+
+
+    <!-- ========================= -->
+    <!-- ساعت -->
+    <!-- ========================= -->
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/timeContainer"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+
+        app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/kara"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="12dp">
+        app:layout_constraintBottom_toTopOf="@id/progressBar">
+
+
+        <ImageView
+            android:id="@+id/clock"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+
+            android:layout_marginEnd="4dp"
+
+            app:srcCompat="@drawable/clock_ic" />
+
+
         <TextView
             android:id="@+id/startTime"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/kara"/>
-<!--            android:text="۱۰:۰۰ تا ۲۱:۰۰"-->
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="5dp"
-                app:srcCompat="@drawable/clock_ic"/>
-        </LinearLayout>
+            android:fontFamily="@font/kara"
+            android:textSize="13sp"
+            android:textStyle="bold"
+
+            android:textColor="#555555" />
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/progressPercent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:gravity="start"
-            android:textColor="#A9A9A9"
-            android:fontFamily="@font/kara"/>
-<!--            android:text="۶۰%"/>-->
+    <!-- ========================= -->
+    <!-- درصد -->
+    <!-- ========================= -->
+
+    <TextView
+        android:id="@+id/progressPercent"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/kara"
+        android:textSize="12sp"
+        android:textStyle="bold"
+
+        android:textColor="#999999"
+
+        app:layout_constraintBottom_toBottomOf="@id/progressBar"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <!-- ========================= -->
+    <!-- Progress -->
+    <!-- ========================= -->
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginBottom="10dp"
-        android:progressDrawable="@drawable/circle"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        />
-    </LinearLayout>
 
+        android:layout_width="0dp"
+        android:layout_height="7dp"
+
+        android:max="100"
+        android:progress="0"
+
+        android:progressDrawable="@drawable/task_progress"
+
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+
+        app:layout_constraintStart_toEndOf="@id/progressPercent"
+        app:layout_constraintEnd_toStartOf="@id/categoryColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:layout_marginStart="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

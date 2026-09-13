@@ -20,7 +20,6 @@
         android:layout_marginTop="7dp"
         android:textSize="17sp"
         android:fontFamily="@font/kara"
-        android:text="لیست روتین ها"
-        android:textColor="#A9A9A9"/>
+        android:text="لیست روتین ها"/>
 
 </LinearLayout>

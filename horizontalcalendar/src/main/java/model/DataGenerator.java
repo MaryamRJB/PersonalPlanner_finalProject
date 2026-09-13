@@ -9,38 +9,69 @@ import java.util.List;
 import java.util.Locale;
 
 public class DataGenerator {
+
     public List<DayModel> generateDaysForCurrMonth() {
-        PrimeCalendar today_calendar = new PersianCalendar();
-        int year = today_calendar.get(Calendar.YEAR);
-        int month = today_calendar.get(Calendar.MONTH);
+
+        PrimeCalendar todayCalendar = new PersianCalendar();
+
+        int year = todayCalendar.get(Calendar.YEAR);
+        int month = todayCalendar.get(Calendar.MONTH);
 
         PrimeCalendar calendar = new PersianCalendar();
         calendar.set(year, month, 1);
-        int last_day_curr_month = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        List<DayModel> days_list = new ArrayList<>();
 
-        for (int i = 1; i <= last_day_curr_month; i++) {
+        int lastDayCurrMonth =
+                calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        List<DayModel> daysList = new ArrayList<>();
+
+        for (int i = 1; i <= lastDayCurrMonth; i++) {
+
             calendar.set(Calendar.DAY_OF_MONTH, i);
 
-            int day_number = i;
-            String month_name = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
-            String day_of_week = getPersianDayName(calendar.get(Calendar.DAY_OF_WEEK));
+            int dayNumber = i;
 
-            boolean is_today = (i == today_calendar.get(Calendar.DAY_OF_MONTH) &&
-                    month == today_calendar.get(Calendar.MONTH) &&
-                    year == today_calendar.get(Calendar.YEAR));
+            String monthName =
+                    calendar.getDisplayName(
+                            Calendar.MONTH,
+                            Calendar.LONG,
+                            Locale.US
+                    );
 
-            boolean is_selected = (i == today_calendar.get(Calendar.DAY_OF_MONTH));
+            String dayOfWeek =
+                    getPersianDayName(
+                            calendar.get(Calendar.DAY_OF_WEEK)
+                    );
 
-            DayModel day = new DayModel(day_number, month_name, day_of_week, year, is_today,is_selected);
-            days_list.add(day);
+            boolean isToday =
+                    (i == todayCalendar.get(Calendar.DAY_OF_MONTH)
+                            && month == todayCalendar.get(Calendar.MONTH)
+                            && year == todayCalendar.get(Calendar.YEAR));
 
+            boolean isSelected =
+                    (i == todayCalendar.get(Calendar.DAY_OF_MONTH));
 
+            DayModel day = new DayModel(
+                    dayNumber,
+                    month,
+                    monthName,
+                    dayOfWeek,
+                    year,
+                    isToday,
+                    isSelected
+            );
+
+            daysList.add(day);
         }
-        return days_list;
+
+        return daysList;
     }
+
+
     private String getPersianDayName(int dayOfWeek) {
+
         switch (dayOfWeek) {
+
             case Calendar.SUNDAY:
                 return "یکشنبه";
 
@@ -63,7 +94,7 @@ public class DataGenerator {
                 return "شنبه";
 
             default:
-                return null;
+                return "";
         }
     }
 }

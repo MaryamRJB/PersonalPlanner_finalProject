@@ -43,4 +43,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "AIPlanner"
 include(":app")
-include ':app', ':horizontalcalendar'
+include(":horizontalcalendar")
+include(":database")
+project(":database").projectDir = file("PersonalPlanner_finalProject/app")

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@drawable/ai_gradient"
+
+    tools:context=".AIPlannerFragment">
+
+
+    <!-- ========================= -->
+    <!-- AI Logo -->
+    <!-- ========================= -->
+
+    <ImageView
+        android:id="@+id/aiLogo"
+
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+
+        android:layout_marginTop="55dp"
+
+        android:src="@drawable/menu_ai_ic"
+
+        android:contentDescription="@null"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <!-- ========================= -->
+    <!-- عنوان -->
+    <!-- ========================= -->
+
+    <TextView
+        android:id="@+id/aiTitle"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+
+        android:text="دستیار هوشمند شما"
+
+        android:fontFamily="@font/kara"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#30303A"
+
+        android:gravity="center"
+        android:textAlignment="center"
+
+        app:layout_constraintTop_toBottomOf="@id/aiLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <!-- ========================= -->
+    <!-- توضیح -->
+    <!-- ========================= -->
+
+    <TextView
+        android:id="@+id/aiSubtitle"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+
+        android:text="کارهایتان را بررسی می‌کنم و بهترین زمان را برای انجام آن‌ها پیدا می‌کنم."
+
+        android:fontFamily="@font/kara"
+        android:textSize="14sp"
+        android:textColor="#666673"
+
+        android:gravity="center"
+        android:textAlignment="center"
+
+        android:lineSpacingExtra="5dp"
+
+        app:layout_constraintTop_toBottomOf="@id/aiTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <!-- ========================= -->
+    <!-- اطلاعات -->
+    <!-- ========================= -->
+
+    <LinearLayout
+        android:id="@+id/aiInfoCard"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+
+        android:orientation="vertical"
+
+        android:background="@drawable/ai_info_background"
+
+        app:layout_constraintTop_toBottomOf="@id/aiSubtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="✦  تحلیل کارهای شما"
+
+            android:fontFamily="@font/kara"
+            android:textSize="15sp"
+            android:textColor="#454550"
+
+            android:gravity="center" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="12dp"
+
+            android:text="◷  بررسی زمان‌های مناسب"
+
+            android:fontFamily="@font/kara"
+            android:textSize="15sp"
+            android:textColor="#454550"
+
+            android:gravity="center" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="12dp"
+
+            android:text="✓  ساخت برنامه‌ی شخصی"
+
+            android:fontFamily="@font/kara"
+            android:textSize="15sp"
+            android:textColor="#454550"
+
+            android:gravity="center" />
+
+    </LinearLayout>
+
+
+    <!-- ========================= -->
+    <!-- وضعیت -->
+    <!-- ========================= -->
+
+    <TextView
+        android:id="@+id/aiStateText"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+
+        android:text="آماده‌ام برای برنامه‌ریزی ✦"
+
+        android:fontFamily="@font/kara"
+        android:textSize="14sp"
+        android:textColor="#666673"
+
+        android:gravity="center"
+        android:textAlignment="center"
+
+        app:layout_constraintTop_toBottomOf="@id/aiInfoCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <!-- ========================= -->
+    <!-- دکمه -->
+    <!-- ========================= -->
+
+    <Button
+        android:id="@+id/btnGenerateSchedule"
+
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="110dp"
+
+        android:text="✦  برنامه‌ریزی کن"
+
+        android:fontFamily="@font/kara"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+
+        android:background="@drawable/ai_button_background"
+
+        android:elevation="5dp"
+        app:layout_constraintTop_toBottomOf="@id/aiStateText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
